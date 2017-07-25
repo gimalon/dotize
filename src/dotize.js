@@ -4,8 +4,12 @@
 
 var dotize = dotize || {};
 
-dotize.convert = function(obj, prefix) {
+dotize.convert = function(obj, prefix, delimiter) {
     var newObj = {};
+
+    if (!delimiter) {
+        delimiter = ".";
+    }
 
     if ((!obj || typeof obj != "object") && !Array.isArray(obj)) {
         if (prefix) {
@@ -29,11 +33,11 @@ dotize.convert = function(obj, prefix) {
 
     function getFieldName(field, prefix, isRoot, isArrayItem, isArray) {
         if (isArray)
-            return (prefix ? prefix : "") + (isNumber(field) ? "[" + field + "]" : (isRoot ? "" : ".") + field);
+            return (prefix ? prefix : "") + (isNumber(field) ? "[" + field + "]" : (isRoot ? "" : delimiter) + field);
         else if (isArrayItem)
             return (prefix ? prefix : "") + "[" + field + "]";
         else
-            return (prefix ? prefix + "." : "") + field;
+            return (prefix ? prefix + delimiter : "") + field;
     }
 
     return function recurse(o, p, isRoot) {
