@@ -17,7 +17,7 @@ dotize.convert = function(obj, prefix) {
     }
 
     function isNumber(f) {
-        return !isNaN(parseInt(f));
+        return !isNaN(f);
     }
 
     function isEmptyObj(obj) {
